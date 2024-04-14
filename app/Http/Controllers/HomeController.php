@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -86,5 +87,23 @@ class HomeController extends Controller
             }
             session()->flash('status','Remove Successfully');
         }
+    }
+
+    public function checkout(Request $request) {
+
+        $order = new Order();
+        $order->user_id = auth()->user()->id; 
+        $order->bill = $request->input('bill');
+        $order->status = 'pending'; 
+        $order->address = $request->input('address');
+        $order->phone = $request->input('phone');
+        $order->full_name = $request->input('full_name');
+        $order->save();
+
+        foreach(session()->get('cart') as $id => $item) {
+            $order->products()->attach($id, ['quantity' => $item['quantity']]);
+        }
+        session()->forget('cart');
+        return redirect()->back()->with('success', 'Order placed successfully!');
     }
 }

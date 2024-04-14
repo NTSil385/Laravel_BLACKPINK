@@ -2,7 +2,11 @@
 
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+ @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 <div class="container">
     <div class="box">
         <div class="master-container">
@@ -29,14 +33,6 @@
                 @endif
             </div>
 
-            <div class="card coupons">
-                <label class="title">Apply coupons</label>
-                <form class="form">
-                    <input type="text" placeholder="Apply your coupons here" class="input_field">
-                    <button>Apply</button>
-                </form>
-            </div>
-
             <div class="card checkout">
                 <label class="title">Checkout</label>
                 <div class="details">
@@ -48,9 +44,20 @@
                     <span></span>
                 </div>
                 <div class="checkout--footer">
-                    <label class="price"><sup>$</sup>{{$total}}</label>
-                    <button class="checkout-btn cart_remove">Checkout</button>
+                    <div class="price"><sup>$</sup>{{$total}}</div>
+                
                 </div>
+                  <div class="card coupons">
+                <label class="title">Address</label>
+                <form class="form" action="{{URL::to('checkout')}}">
+                    <input required type="text" name="full_name" placeholder="Enter Your Full Name" class="input_field">
+                    <input required type="text" name="address" placeholder="Enter Your Address" class="input_field">
+                    <input required type="text" name="phone" placeholder="Enter Your Phone" class="input_field">
+                    <input type="hidden" name="bill" value="{{$total}}" placeholder="Enter Your Phone" class="input_field">
+                    <input type="submit" class="btn btn-primary" value="Checkout">
+                </form>
+            </div>
+
             </div>
         </div>
     </div>
@@ -195,7 +202,6 @@
 
         .coupons form {
             display: grid;
-            grid-template-columns: 1fr 80px;
             gap: 10px;
             padding: 10px;
         }
@@ -281,6 +287,7 @@
             font-size: 22px;
             color: #2B2B2F;
             font-weight: 900;
+            float: right;
         }
 
         .price sup {
