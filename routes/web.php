@@ -19,15 +19,18 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.homepage');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+Route::get("/",[HomeController::class, 'showLanding'])->name("home");
 
 Auth::routes();
 // Route User
 Route::middleware(['auth','user-role:user'])->group(function()
 {
-    Route::get("/home",[HomeController::class, 'userHome'])->name("home");
+   
+    Route::get("/shopping",[HomeController::class, 'showAllProducts'])->name("home.shopping");
+    Route::get("/shopping/{id}",[HomeController::class, 'showProductDetail'])->name("home.details");
 });
 // Route Admin
 Route::middleware(['auth','user-role:admin'])->group(function()

@@ -8,7 +8,7 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                      <h3>Form Add Product <a href="{{route('admin.home')}}" class="btn btn-danger float-end">Back</a></h3>  
+                      <h3>Form Add Product <a href="http://127.0.0.1:8000/product-show" class="btn btn-danger float-end">Back</a></h3>  
                     </div>
                     <div class="card-body">
                         <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">

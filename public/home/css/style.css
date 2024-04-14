@@ -432,17 +432,17 @@ a:focus {
 .shop_section .btn-box a {
   display: inline-block;
   padding: 10px 40px;
-  background-color: #fd9c6b;
+  background-color: #fd6bcca1;
   color: #ffffff;
   border-radius: 5px;
-  border: 1px solid #fd9c6b;
+  border: 1px solid #fd6bcca1;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
 
 .shop_section .btn-box a:hover {
   background-color: transparent;
-  color: #fd9c6b;
+  color: #fd6bcca1;
 }
 
 .about_section .row {
