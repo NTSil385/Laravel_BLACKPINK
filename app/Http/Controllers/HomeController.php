@@ -46,4 +46,45 @@ class HomeController extends Controller
         return view('user.productdetails', compact('product', 'categories'));
     }
 
+    //Cart 
+    public function cart() {
+        return view('user.cart');
+    }
+    public function addToCart($id) {
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])){
+            $cart[$id]['quantity']++;
+        }else {
+            $cart[$id] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'image' => $product->thumbnail_url
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('status','Add to Cart Successfully');
+    }
+    public function update(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart successfully updated!');
+        }
+    }
+    public function remove(Request $request){
+        if($request->id){
+            $cart = session()->get('cart', []);
+            if(isset($cart[$request->id])){
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('status','Remove Successfully');
+        }
+    }
 }

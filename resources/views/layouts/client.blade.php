@@ -24,6 +24,8 @@
   <!-- responsive style -->
   <link href="home/css/responsive.css" rel="stylesheet" />
 
+  
+
 </head>
 
 <body>
@@ -81,6 +83,7 @@
                                 </div>
                         
                         @endguest
+                       
               </div>
             </div>
           </div>
@@ -92,7 +95,7 @@
   <!-- end header section -->
 
     @yield('content')
-
+    @yield('scripts')
   <!-- shop section -->
 
 

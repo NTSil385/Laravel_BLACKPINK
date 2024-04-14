@@ -31,6 +31,10 @@ Route::middleware(['auth','user-role:user'])->group(function()
    
     Route::get("/shopping",[HomeController::class, 'showAllProducts'])->name("home.shopping");
     Route::get("/shopping-details/{id}",[HomeController::class, 'showProductDetail'])->name("home.details");
+    Route::get("/cart",[HomeController::class, 'cart'])->name("cart");
+    Route::get("/add-to-cart/{id}",[HomeController::class, 'addToCart'])->name("add-to-cart");
+    Route::patch('update-cart', [HomeController::class, 'update'])->name('update_cart');
+    Route::delete("/delete-cart",[HomeController::class, 'remove'])->name("remove-cart");
 });
 // Route Admin
 Route::middleware(['auth','user-role:admin'])->group(function()
