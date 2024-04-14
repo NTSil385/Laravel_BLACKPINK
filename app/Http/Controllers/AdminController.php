@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -104,6 +105,32 @@ class AdminController extends Controller
         $products->delete();
         return redirect()->back()->with('status','Delete Successfully');
     }
+
+    //Show Users
+    public function showUsers(){
+        $accounts = User::where('role', 0)->get();
+        return view('dasboard.manage', compact('accounts')); 
+    }
+
+    public function editUsers($id){
+        $accounts = User::find($id);
+        return view('dasboard.edituser', compact('accounts'));
+    }
+
+    public function updateUsers(Request $request, $id){
+        $accounts = User::find($id);
+        $accounts->name = $request->input('name');
+        $accounts->email = $request->input('email');
+        $accounts->save();
+        return redirect()->back()->with('status','Update Successfully');
+    }
+
+        //Delete Users
+        public function deleteUsers($id){
+            $acounts = User::find($id);
+            $acounts->delete();
+            return redirect()->back()->with('status','Delete Successfully');
+        }
 
   
 }
