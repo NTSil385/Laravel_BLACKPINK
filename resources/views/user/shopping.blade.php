@@ -15,7 +15,7 @@
       @foreach($products as $product)
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="">
+            <a href="{{route('home.details', ['id'=>$product->id])}}">
               <div class="img-box">
                 <img src="{{asset('uploads/products/'.$product->thumbnail_url)}}" alt="">
               </div>

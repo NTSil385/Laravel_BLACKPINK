@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,8 @@ class HomeController extends Controller
 
     public function showProductDetail($id) {
         $product = Product::find($id);
-        return view('user.product_detail', compact('product'));
+        $categories = Category::all();
+        return view('user.productdetails', compact('product', 'categories'));
     }
 
 }

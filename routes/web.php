@@ -30,7 +30,7 @@ Route::middleware(['auth','user-role:user'])->group(function()
 {
    
     Route::get("/shopping",[HomeController::class, 'showAllProducts'])->name("home.shopping");
-    Route::get("/shopping/{id}",[HomeController::class, 'showProductDetail'])->name("home.details");
+    Route::get("/shopping-details/{id}",[HomeController::class, 'showProductDetail'])->name("home.details");
 });
 // Route Admin
 Route::middleware(['auth','user-role:admin'])->group(function()
