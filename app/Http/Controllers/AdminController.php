@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Category;
+use App\Models\order_product;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 
@@ -132,5 +134,30 @@ class AdminController extends Controller
             return redirect()->back()->with('status','Delete Successfully');
         }
 
+
+    //Bill 
+        public function showBill(){
+            $bills = Order::all();
+            $users = User::all();
+            return view('dasboard.showbill', compact('bills','users'));
+        }
+
+        
+        public function showOrderDetails($orderId) {
+            $order = Order::findOrFail($orderId);
+
+            // Lấy các mặt hàng trong đơn hàng
+            $orderProducts = $order->products;
+        
+            
+            // Trả về view với dữ liệu đơn hàng và các mặt hàng
+            return view('dasboard.orderdetails', compact('order', 'orderProducts'));
+        }
+
+        public function deleteBill($id){
+            $bill = Order::find($id);
+            $bill->delete();
+            return redirect()->back()->with('status','Delete Successfully');
+        }
   
 }

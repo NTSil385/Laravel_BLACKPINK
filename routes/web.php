@@ -63,4 +63,9 @@ Route::middleware(['auth','user-role:admin'])->group(function()
     
     Route::get('delete-users/{id}',[AdminController::class,'deleteUsers'])->name('users.delete');
 
+    //Bill 
+    Route::get('/bill',[AdminController::class, 'showBill'])->name('bill.all');
+    Route::get("/bill-details/{id}",[AdminController::class, 'showOrderDetails'])->name("bill.details");
+    Route::get('bill-delete/{id}',[AdminController::class,'deleteBill'])->name('bill.delete');
+
 });
